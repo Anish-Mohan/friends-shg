@@ -19,7 +19,8 @@ interface User {
 })
 export class AppComponent {
   title = 'Friends SHG';
-  users: User[] = usersData;
+  // JSON imports widen string literals, so assert the sample data against the app model.
+  users: User[] = usersData as User[];
   selectedUser: User | null = null;
 
   get totalBalance(): number {
