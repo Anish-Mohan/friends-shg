@@ -69,19 +69,14 @@ h1 {
   font-size: 1.7rem;
 }
 
-.primary-btn {
-  border: none;
-  border-radius: 10px;
-  background: #0f172a;
-  color: #fff;
-  padding: 12px 18px;
-  font-weight: 600;
-  cursor: pointer;
+.member-count {
+  color: #64748b;
+  font-size: 0.9rem;
 }
 
 .user-list {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 18px;
 }
 
@@ -98,6 +93,7 @@ h1 {
 .avatar {
   width: 52px;
   height: 52px;
+  flex: 0 0 52px;
   border-radius: 50%;
   display: grid;
   place-items: center;
@@ -108,6 +104,7 @@ h1 {
 
 .user-details {
   flex: 1;
+  min-width: 0;
 }
 
 .user-details h3 {
@@ -124,8 +121,8 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 8px;
-  min-width: 110px;
+  gap: 7px;
+  min-width: 105px;
 }
 
 .status {
@@ -145,13 +142,74 @@ h1 {
   color: #92400e;
 }
 
+.balance-label {
+  color: #64748b;
+  font-size: 0.75rem;
+}
+
 .meta strong {
   font-size: 1rem;
 }
 
+.view-btn,
+.close-btn {
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #fff;
+  color: #1d4ed8;
+  padding: 7px 13px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.view-btn:hover,
+.close-btn:hover {
+  background: #eff6ff;
+}
+
+.user-details-panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 24px;
+  padding: 22px;
+  border: 1px solid #bfdbfe;
+  border-radius: 16px;
+  background: #eff6ff;
+}
+
+.user-details-panel h2 {
+  margin: 0;
+}
+
+.user-details-panel dl {
+  display: flex;
+  gap: 32px;
+  margin: 0;
+}
+
+.user-details-panel dl div {
+  display: grid;
+  gap: 5px;
+}
+
+.user-details-panel dt {
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.user-details-panel dd {
+  margin: 0;
+  font-weight: 700;
+}
+
 @media (max-width: 640px) {
   .topbar,
-  .toolbar {
+  .toolbar,
+  .user-details-panel {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -162,5 +220,14 @@ h1 {
 
   .content {
     padding: 20px 16px;
+  }
+
+  .user-card {
+    align-items: flex-start;
+  }
+
+  .user-details-panel dl {
+    flex-wrap: wrap;
+    gap: 18px;
   }
 }

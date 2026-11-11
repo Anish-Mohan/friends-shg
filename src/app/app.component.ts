@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import usersData from './users.json';
 
 interface User {
   id: number;
@@ -11,21 +13,26 @@ interface User {
 @Component({
   selector: 'app-root',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'Friends SHG';
-  totalBalance = 245000;
+  users: User[] = usersData;
+  selectedUser: User | null = null;
 
-  users: User[] = [
-    { id: 1, name: 'Aarav Sharma', role: 'Treasurer', balance: 12500, status: 'Active' },
-    { id: 2, name: 'Sneha Patel', role: 'Member', balance: 9800, status: 'Active' },
-    { id: 3, name: 'Nikhil Verma', role: 'Member', balance: 11600, status: 'Pending' },
-    { id: 4, name: 'Priya Iyer', role: 'Secretary', balance: 15200, status: 'Active' },
-    { id: 5, name: 'Rohit Nair', role: 'Member', balance: 8700, status: 'Active' },
-    { id: 6, name: 'Meera Joshi', role: 'Member', balance: 10450, status: 'Pending' }
-  ];
+  get totalBalance(): number {
+    return this.users.reduce((total, user) => total + user.balance, 0);
+  }
+
+  viewUser(user: User): void {
+    this.selectedUser = user;
+  }
+
+  closeUserDetails(): void {
+    this.selectedUser = null;
+  }
 
   formatCurrency(value: number): string {
     return new Intl.NumberFormat('en-IN', {

@@ -6,7 +6,7 @@
     </div>
 
     <div class="balance-card">
-      <span>Total Balance</span>
+      <span>Total Group Balance</span>
       <strong>{{ formatCurrency(totalBalance) }}</strong>
     </div>
   </header>
@@ -17,12 +17,12 @@
         <p class="section-label">Members</p>
         <h2>User listing</h2>
       </div>
-      <button class="primary-btn" type="button">+ Add user</button>
+      <span class="member-count">{{ users.length }} members</span>
     </section>
 
     <section class="user-list" aria-label="User listing">
       <article class="user-card" *ngFor="let user of users">
-        <div class="avatar">{{ user.name.charAt(0) }}</div>
+        <div class="avatar" aria-hidden="true">{{ user.name.charAt(0) }}</div>
 
         <div class="user-details">
           <h3>{{ user.name }}</h3>
@@ -33,9 +33,26 @@
           <span class="status" [class.pending]="user.status === 'Pending'">
             {{ user.status }}
           </span>
+          <span class="balance-label">Balance</span>
           <strong>{{ formatCurrency(user.balance) }}</strong>
+          <button class="view-btn" type="button" (click)="viewUser(user)" [attr.aria-label]="'View ' + user.name">
+            View
+          </button>
         </div>
       </article>
+    </section>
+
+    <section class="user-details-panel" *ngIf="selectedUser as user" aria-live="polite">
+      <div>
+        <p class="section-label">Member details</p>
+        <h2>{{ user.name }}</h2>
+      </div>
+      <dl>
+        <div><dt>Role</dt><dd>{{ user.role }}</dd></div>
+        <div><dt>Status</dt><dd>{{ user.status }}</dd></div>
+        <div><dt>Balance</dt><dd>{{ formatCurrency(user.balance) }}</dd></div>
+      </dl>
+      <button class="close-btn" type="button" (click)="closeUserDetails()">Close</button>
     </section>
   </main>
 </div>
