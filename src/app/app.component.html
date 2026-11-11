@@ -1,0 +1,41 @@
+<div class="app-shell">
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Savings overview</p>
+      <h1>{{ title }}</h1>
+    </div>
+
+    <div class="balance-card">
+      <span>Total Balance</span>
+      <strong>{{ formatCurrency(totalBalance) }}</strong>
+    </div>
+  </header>
+
+  <main class="content">
+    <section class="toolbar">
+      <div>
+        <p class="section-label">Members</p>
+        <h2>User listing</h2>
+      </div>
+      <button class="primary-btn" type="button">+ Add user</button>
+    </section>
+
+    <section class="user-list" aria-label="User listing">
+      <article class="user-card" *ngFor="let user of users">
+        <div class="avatar">{{ user.name.charAt(0) }}</div>
+
+        <div class="user-details">
+          <h3>{{ user.name }}</h3>
+          <p>{{ user.role }}</p>
+        </div>
+
+        <div class="meta">
+          <span class="status" [class.pending]="user.status === 'Pending'">
+            {{ user.status }}
+          </span>
+          <strong>{{ formatCurrency(user.balance) }}</strong>
+        </div>
+      </article>
+    </section>
+  </main>
+</div>
